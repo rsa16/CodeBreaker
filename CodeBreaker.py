@@ -1,9 +1,8 @@
 """
 Encoding and Decoding Gui For Multipurpouse Use, Made By Rehan. No copyright laws.
-
 """
 
-#Necessary imports
+# Necessary imports
 from os.path import exists, join
 from os import urandom, getcwd, system
 from time import sleep
@@ -12,16 +11,15 @@ from Crypto.Cipher import AES
 from Crypto import Random
 from base64 import urlsafe_b64encode, urlsafe_b64decode, b64encode, b64decode
 import hashlib
-from sys import exit, argv
+from sys import exit
 
-#Necessary variables
+# Necessary variables
 dalpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 enalpha = ['1', 'c', 'd', 'e', '2', 'g', 'h', 'i', '3', 'k', 'l', 'm', 'n', 'o', '4', 'q', 'r', 's', 't', 'u', '5', 'w', 'x', 'y', 'z', '6']
 specialLets = ['!', '?', ']', '[', '|', '-', '=', '*', '%', '$', '#', '@', '.', ',']
 
 # Custom AES implementation
 class AESCipher(object):
-
 
     def __init__(self, key):
         self.bs = AES.block_size
