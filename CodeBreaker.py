@@ -21,9 +21,9 @@ specialLets = ['!', '?', ']', '[', '|', '-', '=', '*', '%', '$', '#', '@', '.', 
 
 # Custom AES implementation
 class AESCipher(object):
-    
 
-    def __init__(self, key): 
+
+    def __init__(self, key):
         self.bs = AES.block_size
         self.key = hashlib.sha256(key).digest()
 
@@ -47,7 +47,7 @@ class AESCipher(object):
         return s[:-ord(s[len(s)-1:])]
 
 # Key Logic
-if not exists(join(getcwd(), 'key.txt')):    
+if not exists(join(getcwd(), 'key.txt')):
     with open("key.txt", 'wb') as f:
         f.write(Fernet.generate_key())
         f.close()
@@ -80,23 +80,33 @@ def decrypt(message: bytes) -> bytes:
     f = open("key.txt", 'rb')
     return Fernet(f.read()).decrypt(message)
 
+# File enccrypting function.
 def encodeFile(filename):
+    # Read file, and if file not found, trigger error.
     try:
         with open(filename, 'rb') as f:
             read = f.read()
     except FileNotFoundError as e:
         print("File not found!")
         raise FileNotFoundError(" ")
+    # Using other functions to encrypt
     encodedOutput = encrypt(read)
     encodedOutput = urlsafe_b64encode(encodedOutput)
     encodedOutput = cipher.encrypt(encodedOutput)
+    # Save the new encoded output to the file, and return
     with open(filename, 'wb') as f:
         f.write(encodedOutput)
     return
 
-def decodeFile(filename):
-    with open(filename, 'rb') as f:
-        read = f.read()
+# File decrypting function
+def decodeFile(filename)
+    try:
+        with open(filename, 'rb') as f:
+            read = f.read()
+    except FileNotFoundError as e:
+        print("File not found")
+        raise FileNotFoundError(" ")
+
     decodedOutput = cipher.decrypt(read)
     decodedOutput = urlsafe_b64decode(decodedOutput)
     decodedOutput = decrypt(decodedOutput)
@@ -306,4 +316,3 @@ while True:
         system("pause")
     elif (answer == "*"):
         exit()
-                
