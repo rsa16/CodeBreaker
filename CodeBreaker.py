@@ -99,7 +99,7 @@ def encodeFile(filename):
     return
 
 # File decrypting function
-def decodeFile(filename)
+def decodeFile(filename):
     try:
         with open(filename, 'rb') as f:
             read = f.read()
