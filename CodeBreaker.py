@@ -349,6 +349,16 @@ if (args.Method == "encrypt"):
             with open(args.save_file, mode="wb") as f:
                 f.write(output)
                 f.close()
+        with open("key.txt", "rb") as f:
+            with open("saved_key.txt", "wb") as f2:
+                f2.write(f.read())
+                print("Fernet Key is saved as saved_key.txt")
+            f.close()
+        with open("aes_key.txt", "rb") as f:
+            with open("saved_aes_key.txt", "wb") as f2:
+                f2.write(f.read())
+                print("Fernet Key is saved as saved_aes_key.txt")
+            f.close()
         print(output)
         system("pause")
         exit()
@@ -359,6 +369,16 @@ if (args.Method == "encrypt"):
             print("File was not found")
             system("pause")
             exit()
+        with open("key.txt", "rb") as f:
+            with open("saved_key.txt", "wb") as f2:
+                f2.write(f.read())
+                print("Fernet Key is saved as saved_key.txt")
+            f.close()
+        with open("aes_key.txt", "rb") as f:
+            with open("saved_aes_key.txt", "wb") as f2:
+                f2.write(f.read())
+                print("Fernet Key is saved as saved_aes_key.txt")
+            f.close()
         print("File was encrypted")
         system("pause")
         exit()
@@ -383,6 +403,7 @@ if (args.Method == "decrypt"):
             with open(args.save_file, mode="wb") as f:
                 f.write(output)
                 f.close()
+
         print(output)
         system("pause")
         exit()
