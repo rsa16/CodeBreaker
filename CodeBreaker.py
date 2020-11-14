@@ -332,14 +332,14 @@ if (args.Method == "encrypt"):
     if (args.change_key):
         with open("key.txt", "wb") as f:
             f2 = open(args.change_key)
-            f.write(f2.read())
+            f.write(f2.read(), 'rb')
             print("Key changed")
             f2.close()
             f.close()
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key)
-            f.write(f2.read())
+            f.write(f2.read(), 'rb')
             print("AES key changed")
             f2.close()
             f.close()
@@ -386,14 +386,14 @@ if (args.Method == "decrypt"):
     if (args.change_key):
         with open("key.txt", "wb") as f:
             f2 = open(args.change_key)
-            f.write(f2.read())
+            f.write(f2.read(), "rb")
             print("Key changed")
             f2.close()
             f.close()
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key)
-            f.write(f2.read())
+            f.write(f2.read(), "rb")
             print("AES key changed")
             f2.close()
             f.close()
