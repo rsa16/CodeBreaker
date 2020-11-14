@@ -414,7 +414,7 @@ if (args.Method == "decrypt"):
             print("File was not found")
             system("pause")
             exit()
-        if (".txt" in name):
+        if (".txt" in args.filename):
             print(output.decode())
         print("File was decrypted")
         system("pause")
