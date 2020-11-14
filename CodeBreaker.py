@@ -21,6 +21,10 @@ parser.add_argument("-f", "--filename", help="The file you want to encrypt or de
 parser.add_argument("-s", "--save_file", help="Save Output as A file")
 parser.add_argument("-c", "--change_key", help="Change the Fernet key with filename")
 parser.add_argument("-ca", "--change_aes_key", help="Change Fernet Key from Filename")
+parser.add_argument("-s", "--suppress_debug_messages", action="store_true", help="This is helpful\
+when utilizing this tool for a custom script, and you only want to retreive the\
+output, and no debug messages, otherwise, you should probably leave this alone\
+unless you know what your doing.")
 
 
 # Necessary variables
@@ -333,16 +337,24 @@ if (args.Method == "encrypt"):
         with open("key.txt", "wb") as f:
             f2 = open(args.change_key, 'rb')
             f.write(f2.read())
-            print("Key changed")
-            f2.close()
-            f.close()
+            if (args.suppress_debug_messages):
+                f2.close()
+                f.close()
+            else:
+                print("Key changed")
+                f2.close()
+                f.close()
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key, 'rb')
             f.write(f2.read())
-            print("AES key changed")
-            f2.close()
-            f.close()
+            if (args.suppress_debug_messages):
+                f2.close()
+                f.close()
+            else:
+                print("AES key changed")
+                f2.close()
+                f.close()
     if (args.Text):
         output = encode(args.Text)
         if (args.save_file):
@@ -352,70 +364,105 @@ if (args.Method == "encrypt"):
         with open("key.txt", "rb") as f:
             with open("saved_key.txt", "wb") as f2:
                 f2.write(f.read())
-                print("Fernet Key is saved as saved_key.txt")
+                if (args.suppress_debug_messages):
+                    pass
+                else:
+                    print("Fernet Key is saved as saved_key.txt")
             f.close()
         with open("aes_key.txt", "rb") as f:
             with open("saved_aes_key.txt", "wb") as f2:
                 f2.write(f.read())
-                print("Fernet Key is saved as saved_aes_key.txt")
+                if (args.suppress_debug_messages):
+                    pass
+                else:
+                    print("Fernet Key is saved as saved_aes_key.txt")
             f.close()
         print(output)
-        system("pause")
-        exit()
+        if (args.suppress_debug_messages):
+            exit()
+        else:
+            system("pause")
+            exit()
     elif (args.filename):
         try:
             encodeFile(args.filename)
         except FileNotFoundError as e:
-            print("File was not found")
-            system("pause")
-            exit()
+            if (args.suppress_debug_messages):
+                exit()
+            else:
+                print("File was not found")
+                system("pause")
+                exit()
         with open("key.txt", "rb") as f:
             with open("saved_key.txt", "wb") as f2:
                 f2.write(f.read())
-                print("Fernet Key is saved as saved_key.txt")
+                if (args.suppress_debug_messages):
+                    pass
+                else:
+                    print("Fernet Key is saved as saved_key.txt")
             f.close()
         with open("aes_key.txt", "rb") as f:
             with open("saved_aes_key.txt", "wb") as f2:
                 f2.write(f.read())
-                print("Fernet Key is saved as saved_aes_key.txt")
+                if (args.suppress_debug_messages):
+                    pass
+                else:
+                    print("Fernet Key is saved as saved_aes_key.txt")
             f.close()
-        print("File was encrypted")
-        system("pause")
-        exit()
+        if (args.suppress_debug_messages):
+            exit()
+        else:
+            print("File was encrypted")
+            system("pause")
+            exit()
 if (args.Method == "decrypt"):
     if (args.change_key):
         with open("key.txt", "wb") as f:
             f2 = open(args.change_key, 'rb')
             f.write(f2.read())
-            print("Key changed")
-            f2.close()
-            f.close()
+            if (args.suppress_debug_messages):
+                f2.close()
+                f.close()
+            else:
+                print("Key changed")
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key, 'rb')
             f.write(f2.read())
-            print("AES key changed")
-            f2.close()
-            f.close()
+            if (args.suppress_debug_messages):
+                f2.close()
+                f.close()
+            else:
+                print("AES key changed")
+                f2.close()
+                f.close()
     if (args.Text):
         output = decode(args.Text)
         if (args.save_file):
             with open(args.save_file, mode="wb") as f:
                 f.write(output)
                 f.close()
-
         print(output)
-        system("pause")
-        exit()
+        if (args.suppress_debug_messages):
+            exit()
+        else:
+            system("pause")
+            exit()
     elif (args.filename):
         try:
             output = decodeFile(args.filename)
         except FileNotFoundError as e:
-            print("File was not found")
-            system("pause")
-            exit()
+            if (args.suppress_debug_messages):
+                exit()
+            else:
+                print("File was not found")
+                system("pause")
+                exit()
         if (".txt" in args.filename):
             print(output.decode())
-        print("File was decrypted")
-        system("pause")
-        exit()
+        if (args.suppress_debug_messages):
+            exit()
+        else:
+            print("File was decrypted")
+            system("pause")
+            exit()
