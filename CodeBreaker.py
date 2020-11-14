@@ -21,7 +21,7 @@ parser.add_argument("-f", "--filename", help="The file you want to encrypt or de
 parser.add_argument("-s", "--save_file", help="Save Output as A file")
 parser.add_argument("-c", "--change_key", help="Change the Fernet key with filename")
 parser.add_argument("-ca", "--change_aes_key", help="Change Fernet Key from Filename")
-parser.add_argument("-s", "--suppress_debug_messages", action="store_true", help="This is helpful\
+parser.add_argument("-sp", "--suppress_debug_messages", action="store_true", help="This is helpful\
 when utilizing this tool for a custom script, and you only want to retreive the\
 output, and no debug messages, otherwise, you should probably leave this alone\
 unless you know what your doing.")
