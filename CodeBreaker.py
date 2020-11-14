@@ -11,7 +11,17 @@ from Crypto.Cipher import AES
 from Crypto import Random
 from base64 import urlsafe_b64encode, urlsafe_b64decode, b64encode, b64decode
 import hashlib
-from sys import exit
+from sys import exit, argv
+from argparse import ArgumentParser
+
+parser = ArgumentParser(description="Encryption And Decryption CLI Tool")
+parser.add_argument("Method", help="What You Want to do, i.e. encrypt, decrypt", choices=["encrypt", "decrypt"])
+parser.add_argument("-t", "--Text", help="The text you want to encode.")
+parser.add_argument("-f", "--filename", help="The file you want to encrypt or decrypt. Optional.")
+parser.add_argument("-s", "--save_file", help="Save Output as A file")
+parser.add_argument("-c", "--change_key", help="Change the Fernet key with filename")
+parser.add_argument("-ca", "--change_aes_key", help="Change Fernet Key from Filename")
+
 
 # Necessary variables
 dalpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -193,124 +203,198 @@ def decode(msg):
     decodedOutput = ''.join(theDLetters)
     return decodedOutput
 
-# Main loop
-while True:
-    print("Would you like to encode, or decode? Type * to exit. E / D")
-    answer = input("> ")
-    if (answer == "E") or (answer == "e"):
-        print("Would you like to change the current keys? Y / N")
-        a = input("> ")
-        if (a == "y") or (a == "Y"):
-            with open("key.txt", "wb") as f:
-                print("Name of file saved with fernet key: ")
-                an = input("> ")
-                print("Changing Fernet Key...")
-                f2 = open(an)
-                f.write(f2.read())
+if (len(argv) == 1):
+    # Main loop
+    while True:
+        print("Would you like to encode, or decode? Type * to exit. E / D")
+        answer = input("> ")
+        if (answer == "E") or (answer == "e"):
+            print("Would you like to change the current keys? Y / N")
+            a = input("> ")
+            if (a == "y") or (a == "Y"):
+                with open("key.txt", "wb") as f:
+                    print("Name of file saved with fernet key: ")
+                    an = input("> ")
+                    print("Changing Fernet Key...")
+                    f2 = open(an)
+                    f.write(f2.read())
+                    sleep(1.5)
+                    print("Changed!")
+                with open ("aes_key.txt", "wb") as f:
+                    print("Name of file saved with aes key: ")
+                    an = input ("> ")
+                    print("Changing...")
+                    f.write(an.encode())
+                    del cipher
+                    cipher = AESCipher(an)
+                    sleep(1.5)
+                    print("Changed!")
+            if (a == "n") or (a == "N"):
+                print("Okay!")
+            print("Would you like to encode from command prompt, or encode a file? C / F")
+            a = input("> ")
+            if (a == "F") or (a == "f"):
+                print("Filename?")
+                try:
+                    encodeFile(input("> "))
+                except FileNotFoundError as e:
+                    print("The passed in filename was not found!")
+                    continue
+                print("File encrypted")
+            if (a == "C") or (a == "c"):
+                encodeTest = encode(input("Encode:"))
+                print(encodeTest)
+            with open("key.txt", "rb") as f:
+                with open("saved_key.txt", "wb") as f2:
+                    f2.write(f.read())
+                    print("Fernet Key is saved as saved_key.txt")
+                f.close()
+            with open("aes_key.txt", "rb") as f:
+                with open("saved_aes_key.txt", "wb") as f2:
+                    f2.write(f.read())
+                    print("Fernet Key is saved as saved_aes_key.txt")
+                f.close()
+            if (a == "C") or (a == "c"):
+                print("Would you like to save to a file? Y / N")
+                a = input("> ")
+                if (a == "y") or (a == "Y"):
+                    print("Name the file...")
+                    b = str(input("> "))
+                    with open(b, 'wb') as f:
+                        print("Saving...")
+                        f.write(encodeTest)
+                        sleep(1.5)
+                        print("Saved!")
+                elif (a == "n") or (a == "N"):
+                    print("Okay then!")
+                    system("pause")
+            system("pause")
+        elif (answer == "D") or (answer == "d"):
+            print("Would you like to change the current keys? Y / N")
+            a = input("> ")
+            if (a == "y") or (a == "Y"):
+                with open("key.txt", "wb") as f:
+                    print("Name of file saved with fernet key: ")
+                    an = input("> ")
+                    print("Changing Fernet Key...")
+                    f2 = open(an, 'rb')
+                    f.write(f2.read())
+                    sleep(1.5)
+                    f.close()
+                    print("Changed!")
+                with open ("aes_key.txt", "wb") as f:
+                    print("Name of file saved with aes key: ")
+                    an = input ("> ")
+                    print("Changing...")
+                    f2 = open(an, 'rb')
+                    f.write(f2.read())
+                    sleep(1.5)
+                    f.close()
+                    with open("aes_key.txt", "rb") as f:
+                        del cipher
+                        cipher = AESCipher(f.read())
+                        f.close()
+                    print("Changed!")
+            if (a == "n") or (a == "N"):
+                print("Okay!")
+            print("Would you like to decode from command prompt, or decode a file? C / F")
+            answer = input("> ")
+            if (answer == "C") or (answer == "c"):
+                decodeTest = decode(input("Decode:"))
+            elif (answer == "F") or (answer == "f"):
+                print("What is the name of the file you'd like to open?")
+                name = input("> ")
+                decodeTest = decodeFile(name)
+                print("Decoding...")
                 sleep(1.5)
-                print("Changed!")
-            with open ("aes_key.txt", "wb") as f:
-                print("Name of file saved with aes key: ")
-                an = input ("> ")
-                print("Changing...")
-                f.write(an.encode())
-                del cipher
-                cipher = AESCipher(an)
-                sleep(1.5)
-                print("Changed!")
-        if (a == "n") or (a == "N"):
-            print("Okay!")
-        print("Would you like to encode from command prompt, or encode a file? C / F")
-        a = input("> ")
-        if (a == "F") or (a == "f"):
-            print("Filename?")
-            try:
-                encodeFile(input("> "))
-            except FileNotFoundError as e:
-                print("The passed in filename was not found!")
-                continue
-            print("File encrypted")
-        if (a == "C") or (a == "c"):
-            encodeTest = encode(input("Encode:"))
-            print(encodeTest)
-        with open("key.txt", "rb") as f:
-            with open("saved_key.txt", "wb") as f2:
-                f2.write(f.read())
-                print("Fernet Key is saved as saved_key.txt")
-            f.close()
-        with open("aes_key.txt", "rb") as f:
-            with open("saved_aes_key.txt", "wb") as f2:
-                f2.write(f.read())
-                print("Fernet Key is saved as saved_aes_key.txt")
-            f.close()
-        if (a == "C") or (a == "c"):
+                print("Decoded!")
+            if (".txt" in name):
+                print(decodeTest.decode())
             print("Would you like to save to a file? Y / N")
             a = input("> ")
             if (a == "y") or (a == "Y"):
                 print("Name the file...")
                 b = str(input("> "))
-                with open(b, 'wb') as f:
+                with open(b, 'w') as f:
                     print("Saving...")
-                    f.write(encodeTest)
+                    f.write(decodeTest)
                     sleep(1.5)
                     print("Saved!")
             elif (a == "n") or (a == "N"):
                 print("Okay then!")
-                system("pause")
+            system("pause")
+        elif (answer == "*"):
+            exit()
+
+# Argument parsing, if any
+args = parser.parse_args()
+if (args.Method == "encrypt"):
+    if (args.change_key):
+        with open("key.txt", "wb") as f:
+            f2 = open(args.change_key)
+            f.write(f2.read())
+            print("Key changed")
+            f2.close()
+            f.close()
+    if (args.change_aes_key):
+        with open("aes_key.txt", "wb") as f:
+            f2 = open(args.change_aes_key)
+            f.write(f2.read())
+            print("AES key changed")
+            f2.close()
+            f.close()
+    if (args.Text):
+        output = encode(args.Text)
+        if (args.save_file):
+            with open(args.save_file, mode="wb") as f:
+                f.write(output)
+                f.close()
+        print(output)
         system("pause")
-    elif (answer == "D") or (answer == "d"):
-        print("Would you like to change the current keys? Y / N")
-        a = input("> ")
-        if (a == "y") or (a == "Y"):
-            with open("key.txt", "wb") as f:
-                print("Name of file saved with fernet key: ")
-                an = input("> ")
-                print("Changing Fernet Key...")
-                f2 = open(an, 'rb')
-                f.write(f2.read())
-                sleep(1.5)
+        exit()
+    elif (args.filename):
+        try:
+            encodeFile(args.filename)
+        except FileNotFoundError as e:
+            print("File was not found")
+            system("pause")
+            exit()
+        print("File was encrypted")
+        system("pause")
+        exit()
+if (args.Method == "decrypt"):
+    if (args.change_key):
+        with open("key.txt", "wb") as f:
+            f2 = open(args.change_key)
+            f.write(f2.read())
+            print("Key changed")
+            f2.close()
+            f.close()
+    if (args.change_aes_key):
+        with open("aes_key.txt", "wb") as f:
+            f2 = open(args.change_aes_key)
+            f.write(f2.read())
+            print("AES key changed")
+            f2.close()
+            f.close()
+    if (args.Text):
+        output = decode(args.Text)
+        if (args.save_file):
+            with open(args.save_file, mode="wb") as f:
+                f.write(output)
                 f.close()
-                print("Changed!")
-            with open ("aes_key.txt", "wb") as f:
-                print("Name of file saved with aes key: ")
-                an = input ("> ")
-                print("Changing...")
-                f2 = open(an, 'rb')
-                f.write(f2.read())
-                sleep(1.5)
-                f.close()
-                with open("aes_key.txt", "rb") as f:
-                    del cipher
-                    cipher = AESCipher(f.read())
-                    f.close()
-                print("Changed!")
-        if (a == "n") or (a == "N"):
-            print("Okay!")
-        print("Would you like to decode from command prompt, or decode a file? C / F")
-        answer = input("> ")
-        if (answer == "C") or (answer == "c"):
-            decodeTest = decode(input("Decode:"))
-        elif (answer == "F") or (answer == "f"):
-            print("What is the name of the file you'd like to open?")
-            name = input("> ")
-            decodeTest = decodeFile(name)
-            print("Decoding...")
-            sleep(1.5)
-            print("Decoded!")
+        print(output)
+        system("pause")
+        exit()
+    elif (args.filename):
+        try:
+            output = decodeFile(args.filename)
+        except FileNotFoundError as e:
+            print("File was not found")
+            system("pause")
+            exit()
         if (".txt" in name):
-            print(decodeTest.decode())
-        print("Would you like to save to a file? Y / N")
-        a = input("> ")
-        if (a == "y") or (a == "Y"):
-            print("Name the file...")
-            b = str(input("> "))
-            with open(b, 'w') as f:
-                print("Saving...")
-                f.write(decodeTest)
-                sleep(1.5)
-                print("Saved!")
-        elif (a == "n") or (a == "N"):
-            print("Okay then!")
+            print(output.decode())
+        print("File was decrypted")
         system("pause")
-    elif (answer == "*"):
         exit()
