@@ -71,7 +71,6 @@ else:
 if not exists(join(getcwd(), 'aes_key.txt')):
     with open("aes_key.txt", 'wb') as f:
         random = urandom(16)
-        print(random)
         f.write(random)
         f.close()
 else:
