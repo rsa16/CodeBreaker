@@ -112,3 +112,55 @@ body {
 	line-height: undefined;
 	font-weight: bold;
 }
+#e27_18 {
+	background-color:rgba(74.0000031888485, 83.00000265240669, 90.00000223517418, 1);
+	opacity:1;
+	position: absolute;
+	width:717px;
+	height:6px;
+	left: 50vh;
+	top: 45vh;
+}
+
+#e27_1 {
+	color:rgba(127.9736977815628, 195.32335102558136, 224.18749898672104, 1);
+	opacity:1;
+	position: absolute;
+	width:700px;
+	height:185px;
+	left: 50vh;
+	top: 20vh;
+	font-family:Lato;
+	text-align:center;
+	font-size:130px;
+	letter-spacing:0;
+	line-height:undefined;
+}
+#e32_0 {
+	position:absolute;
+	opacity:1;
+	width:698px;
+	height:213px;
+}
+#e27_3 {
+	color:rgba(127.9736977815628, 195.32335102558136, 224.18749898672104, 1);
+	opacity:1;
+	width:698px;
+	height:213px;
+	position:absolute;
+	font-family:Lato;
+	text-align:center;
+	font-size:40px;
+	letter-spacing:0;
+	line-height:undefined;
+}
+#e27_4 {
+	border-radius:500px;
+	background-color:rgba(127.9736977815628, 195.32335102558136, 224.18749898672104, 1);
+	opacity:1;
+	width:15px;
+	height:13px;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
