@@ -1,7 +1,6 @@
 body, html {
 	margin: 0;
 	padding: 0;
-	overflow-x: hidden;
 }
 #e25_4 {
 	margin: 0
@@ -24,7 +23,7 @@ body, html {
 	width:80px;
 	height:80px;
 	position: relative;
-	left: 96vh;
+	left: calc(50vw + 5vw);
 	top:45vh;
 	background-image:url(images/codebreaker-3.png);
 	background-repeat: no-repeat;
@@ -58,7 +57,7 @@ body, html {
 	width:240px;
 	height:60px;
 	position: absolute;
-	left: calc(50vh + 35vh);
+	left: 50vw;
 	top: 60vh;
 	display: flex;
 	align-items: center;
@@ -95,7 +94,7 @@ body, html {
 	color:rgba(72.00000330805779, 106.00000128149986, 158.00000578165054, 1);
 	opacity:1;
 	position: absolute;
-	left: calc(50vh - 25vh);
+	left: calc(50vw - 25vw);
 	top: 10vh;
 	width:990px;
 	height:319px;
@@ -109,7 +108,7 @@ body, html {
 	color: #3D80A6;
 	opacity: 1;
 	position: absolute;
-	left: 72vh;
+	left: 45vw;
 	top: 35vh;
 	width: 381px;
 	height: 84px;
