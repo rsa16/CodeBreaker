@@ -8,6 +8,7 @@
           <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
           <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
           <link rel="stylesheet" href="styles.css">
+          <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         </head>
 
         <body>
@@ -15,15 +16,17 @@
             <div id="e25_4">
             </div>
             <div id="e25_2"></div>
-            <div id="Header" data-aos="fade-down">
+            <div id="Header" data-aos="fade-down" data-aos-mirror="false">
               <div id="e25_10" role="button">
-                <span id="e25_9">Download</span>
+                <span id="e25_9"><a id="header_download_link"href="downloads/CodeBreaker Installer.exe">Download</a></span>
               </div>
               <span id="e25_15">CodeBreaker</span>
               <span id="e25_16">World Class Encryption Tool</span>
               <div id="e25_17"></div>
+              <span id="e37_0">Features Down Below</span>
+              <div id="e38_0"></div>
             </div>
-            <div id="e25_7" data-aos="fade-right" data-aos-mirror="false">
+            <div id="e25_7" data-aos="fade-right" data-aos-mirror="false" data-aos-duration=1500>
               <span id="e27_1">Features</span>
               <div id="e27_18"></div>
               <div id="e32_0">
@@ -41,7 +44,7 @@
             </div>
             <div id="e34_0">
               <div id="e27_15"></div>
-              <div id="e27_28"></div>
+              <a id="e27_28" href="https://github.com/rsa16/CodeBreaker" target="_blank"></a>
               <span id="e27_29">Copyright CodeBreaker Inc ©</span>
             </div>
           </div>
@@ -52,5 +55,12 @@
   				easing: 'ease-out',
   				duration: 1000
   			});
-		</script>
+      </script>
+      <script type="text/javascript">
+          $('#e38_0').on('click', function(e) {
+        $('html, body').animate({
+          scrollTop: $('#e25_7').offset().top
+        }, 1200);
+      });
+      </script>
 </html>
