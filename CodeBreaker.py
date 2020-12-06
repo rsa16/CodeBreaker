@@ -401,7 +401,7 @@ if (args.Method == "encrypt"):
                             print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
                     f.close()
                 else:
-                    with open(args.saved_key_name, "wb") as f2:
+                    with open(args.save_key_name, "wb") as f2:
                         f2.write(f.read())
                         if (args.suppress_debug_messages):
                             pass
@@ -423,7 +423,7 @@ if (args.Method == "encrypt"):
                         if (args.suppress_debug_messages):
                             pass
                         else:
-                            print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
+                            print(f"Fernet Key is saved as {args.save_key}/{args.save_aes_key_name}")
                     f.close()
         print(output)
         if (args.suppress_debug_messages):
@@ -451,7 +451,7 @@ if (args.Method == "encrypt"):
                         print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
                 f.close()
             else:
-                with open("saved_key.txt", "wb") as f2:
+                with open(args.save_key_name, "wb") as f2:
                     f2.write(f.read())
                     if (args.suppress_debug_messages):
                         pass
@@ -467,7 +467,7 @@ if (args.Method == "encrypt"):
                     else:
                         print(f"AES Key is saved as {args.save_key}/{args.save_aes_key_name}")
                 f.close()
-            with open("saved_aes_key.txt", "wb") as f2:
+            with open(save_aes_key_name, "wb") as f2:
                 f2.write(f.read())
                 if (args.suppress_debug_messages):
                     pass
