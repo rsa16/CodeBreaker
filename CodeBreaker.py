@@ -21,13 +21,14 @@ parser.add_argument("-f", "--filename", help="The file you want to encrypt or de
 parser.add_argument("-s", "--save_file", help="Save Output as A file")
 parser.add_argument("-c", "--change_key", help="Change the Fernet key with filename")
 parser.add_argument("-ca", "--change_aes_key", help="Change Fernet Key from Filename")
-parser.add_argument("-sk", "--save_key", help="The location you want to save the Fernet and AES key. Leave at '.', if you want to save at current location.")
+parser.add_argument("-sk", "--save_key", default=".", help="The location you want to save the Fernet and AES key. Left at '.', if you want to save at current location. Default is also '.'")
 parser.add_argument("-skn", "--save_key_name", help="The name of the Fernet Key")
 parser.add_argument("-sakn", "--save_aes_key_name", help="The name of the AES key")
 parser.add_argument("-sp", "--suppress_debug_messages", action="store_true", help="This is helpful\
 when utilizing this tool for a custom script, and you only want to retreive the\
 output, and no debug messages, otherwise, you should probably leave this alone\
 unless you know what your doing.")
+parser.add_argument("-st", "--standard_file_decryption", action="store_true", help="Decrypt with special cipher and other encryptions. Helpful when -t and -s were used together whilst encrypting.")
 
 
 # Necessary variables
@@ -113,17 +114,25 @@ def encodeFile(filename):
     return
 
 # File decrypting function
-def decodeFile(filename):
+def decodeFile(filename,argv=""):
     try:
         with open(filename, 'rb') as f:
             read = f.read()
     except FileNotFoundError as e:
         print("File not found")
         raise FileNotFoundError(" ")
+    if not (argv == ""):
+        decodedOutput = cipher.decrypt(read)
+        decodedOutput = urlsafe_b64decode(decodedOutput)
+        decodedOutput = decrypt(decodedOutput)
+    else:
+        if (argv.standard_file_decryption):
+            decodedOutput = decode(read)
+        else:
+            decodedOutput = cipher.decrypt(read)
+            decodedOutput = urlsafe_b64decode(decodedOutput)
+            decodedOutput = decrypt(decodedOutput)
 
-    decodedOutput = cipher.decrypt(read)
-    decodedOutput = urlsafe_b64decode(decodedOutput)
-    decodedOutput = decrypt(decodedOutput)
     with open(filename, 'wb') as f:
         f.write(decodedOutput)
         f.close()
@@ -252,9 +261,9 @@ if (len(argv) == 1):
                 print(encodeTest)
             print("Where would you like to save your keys? Type '.' for current location")
             a = input("> ")
-            print("What would you like to name your fernet key")
+            print("What would you like to name your fernet key?")
             key_name = input("> ")
-            print("What would you like to name you aes key")
+            print("What would you like to name you aes key?")
             aes_key_name = input("> ")
             with open("key.txt", "rb") as f:
                 if not (a == '.'):
@@ -263,7 +272,7 @@ if (len(argv) == 1):
                         print(f"Fernet Key is saved as {a}/{key_name}")
                     f.close()
                 else:
-                    with open("saved_key.txt", "wb") as f2:
+                    with open(key_name, "wb") as f2:
                         f2.write(f.read())
                         print("Fernet Key is saved as saved_key.txt")
                     f.close()
@@ -274,7 +283,7 @@ if (len(argv) == 1):
                         print(f"AES Key is saved as {a}/{aes_key_name}")
                     f.close()
                 else:
-                    with open("saved_aes_key.txt", "wb") as f2:
+                    with open(aes_key_name, "wb") as f2:
                         f2.write(f.read())
                         print("Fernet Key is saved as saved_aes_key.txt")
                     f.close()
@@ -392,12 +401,12 @@ if (args.Method == "encrypt"):
                             print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
                     f.close()
                 else:
-                    with open("saved_key.txt", "wb") as f2:
+                    with open(args.saved_key_name, "wb") as f2:
                         f2.write(f.read())
                         if (args.suppress_debug_messages):
                             pass
                         else:
-                            print("Fernet Key is saved as saved_key.txt")
+                            print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
                     f.close()
             with open("aes_key.txt", "rb") as f:
                 if not (args.save_key == '.'):
@@ -409,12 +418,12 @@ if (args.Method == "encrypt"):
                              print(f"AES Key is saved as {args.save_key}/{args.save_aes_key_name}")
                      f.close()
                 else:
-                    with open("saved_aes_key.txt", "wb") as f2:
+                    with open(args.save_aes_key_name, "wb") as f2:
                         f2.write(f.read())
                         if (args.suppress_debug_messages):
                             pass
                         else:
-                            print("Fernet Key is saved as saved_aes_key.txt")
+                            print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
                     f.close()
         print(output)
         if (args.suppress_debug_messages):
@@ -506,7 +515,7 @@ if (args.Method == "decrypt"):
             exit()
     elif (args.filename):
         try:
-            output = decodeFile(args.filename)
+            output = decodeFile(args.filename, args)
         except FileNotFoundError as e:
             if (args.suppress_debug_messages):
                 exit()
