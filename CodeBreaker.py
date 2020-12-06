@@ -467,7 +467,7 @@ if (args.Method == "encrypt"):
                     else:
                         print(f"AES Key is saved as {args.save_key}/{args.save_aes_key_name}")
                 f.close()
-            with open(save_aes_key_name, "wb") as f2:
+            with open(args.save_aes_key_name, "wb") as f2:
                 f2.write(f.read())
                 if (args.suppress_debug_messages):
                     pass
