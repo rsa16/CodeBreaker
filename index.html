@@ -1,66 +1,77 @@
-<html lang="en">
-        <head>
-          <meta charset="utf-8">
-
-          <title>CodeBreaker</title>
-          <meta name="description" content="Figma htmlGenerator">
-          <meta name="author" content="htmlGenerator">
-          <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-          <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-          <link rel="stylesheet" href="styles.css">
-          <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        </head>
-
-        <body>
-          <div id="e6_1">
-            <div id="e25_4">
-            </div>
-            <div id="e25_2"></div>
-            <div id="Header" data-aos="fade-down" data-aos-mirror="false">
-              <div id="e25_10" role="button">
-                <span id="e25_9"><a id="header_download_link"href="downloads/CodeBreaker Installer.exe">Download</a></span>
-              </div>
-              <span id="e25_15">CodeBreaker</span>
-              <span id="e25_16">World Class Encryption Tool</span>
-              <div id="e25_17"></div>
-              <span id="e37_0">Features Down Below</span>
-              <div id="e38_0"></div>
-            </div>
-            <div id="e25_7" data-aos="fade-right" data-aos-mirror="false" data-aos-duration=1500>
-              <span id="e27_1">Features</span>
-              <div id="e27_18"></div>
-              <div id="e32_0">
-                <span id="e27_3">High Grade Encryption, including Fernet, AES, custom subsitution cipher, and Base64</span>
-                <div id="e27_4"></div>
-              </div>
-              <div id="e32_1">
-                <span id="e27_8">(Coming Soon) Cloud Protection Database, or CPD which allows you to transport encrypted documents safely to another person, and have them decrypted</span>
-                <div id="ei27_9_27_4"></div>
-              </div>
-              <div id="e32_2">
-                <span id="e27_11">Command Line Utitily, as well as (Coming Soon) GUI. Argument handling supported as well, and an option to suppress debug messages, allowing the tool to be used in other programs.</span>
-                <div id="ei27_12_27_4"></div>
-              </div>
-            </div>
-            <div id="e34_0">
-              <div id="e27_15"></div>
-              <a id="e27_28" href="https://github.com/rsa16/CodeBreaker" target="_blank"></a>
-              <span id="e27_29">Copyright CodeBreaker Inc ©</span>
-            </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodeBreaker</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  </head>
+  <body data-aos-easing="ease-out" data-aos-duration="1000" data-aos-delay="0">
+    <div id="main-bg"/>
+    <div id="overlay"/>
+    <div id="header" data-aos="fade-down" data-aos-mirror="false" class="aos-init aos-animate">
+      <div class="columns is-centered is-vcentered is-multiline" data-aos="fade-down" data-aos-mirror="false" class="aos-init aos-animate">
+        <div class="column is-narrow has-text-centered" >
+          <h1 class="title">
+            CodeBreaker
+          </h1>
+          <p class="subtitle">
+            World Class Encryption Tool
+          </p>
+          <span class="icon"/>
+          <div id="download_rect">
+            <a id="header_download_link" href="downloads/CodeBreaker Installer.exe">Download</a>
           </div>
-      </body>
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      <script>
+          <p id="featuretext">
+            Features Down Below
+          </p>
+          <span id="icon-down"/>
+        </div>
+    </div>
+  </div>
+  <div id="imcrazy">
+    <div id="features" class="columns is-vcentered" data-aos="fade-right" data-aos-mirror="false" data-aos-duration="1500" class="aos-init aos-animate">
+      <div id="e">
+        <div class="column is-narrow has-text-centered">
+          <span class="sectionTitle">Features</span>
+          <span id="seperator"/>
+          <span class="text" id="feature1">•&nbsp;&nbsp;&nbsp;High Grade Encryption, including Fernet, AES,<br/> custom subsitution cipher, and Base64</span>
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <span class="text" id="feature2">•&nbsp;&nbsp;&nbsp;(Coming Soon) Cloud Protection Database, or <br/>CPD which allows you to transport encrypted<br/>documents safely to another person, and have</br>them decrypted</span>
+        </div>
+        <div class="column is-narrow has-text-centered">
+          <span class="text" id="feature3">•&nbsp;&nbsp;&nbsp;Command Line Utitily, as well as<br/>(Coming Soon) GUI. Argument handling<br/>supported as well, and an option to<br/>suppress debug messages, allowing the<br/>tool to be used in other programs.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="columns is-vcentered footere">
+    <div class="column is-narrow has-text-centered">
+      <a id="footer_link1" href="https://github.com/rsa16/CodeBreaker" target="_blank"></a>
+    </div>
+    <div class="column is-narrow has-text-centered">
+      <span id="footer_text">Copyright CodeBreaker Inc ©</span>
+    </div>
+  </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
   			AOS.init({
   				easing: 'ease-out',
   				duration: 1000
   			});
       </script>
       <script type="text/javascript">
-          $('#e38_0').on('click', function(e) {
-        $('html, body').animate({
-          scrollTop: $('#e25_7').offset().top
-        }, 1200);
-      });
-      </script>
+              $('#icon-down').on('click', function(e) {
+            $('html, body').animate({
+              scrollTop: $('#features').offset().top
+            }, 1200);
+          });
+          </script>
+  </body>
 </html>
