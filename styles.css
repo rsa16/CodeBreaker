@@ -166,6 +166,8 @@
 	position: absolute;
 	font-family: Lato;
 	text-align: center;
+	left: 25vw;
+	margin-top: 10vh;
 	font-size: 35px;
 	letter-spacing: 0;
 	white-space: nowrap;
