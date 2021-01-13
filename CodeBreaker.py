@@ -13,6 +13,7 @@ from base64 import urlsafe_b64encode, urlsafe_b64decode, b64encode, b64decode
 import hashlib
 from sys import exit, argv
 from argparse import ArgumentParser
+from shutil import copyfile
 
 parser = ArgumentParser(description="Encryption And Decryption CLI Tool")
 parser.add_argument("Method", help="What You Want to do, i.e. encrypt, decrypt", choices=["encrypt", "decrypt"])
@@ -65,7 +66,7 @@ class AESCipher(object):
 # Key Logic
 if not exists(join(getcwd(), 'key.txt')):
     with open("key.txt", 'wb') as f:
-        f.write(Fernet.generate_key())
+        f.write(b64encode(Fernet.generate_key()))
         f.close()
 else:
     pass
@@ -79,7 +80,8 @@ else:
 
 # Reading Keys
 with open("key.txt", 'rb') as f:
-    t = Fernet(f.read())
+    key = b64decode(f.read())
+    l = Fernet(key)
     f.close()
 with open("aes_key.txt", 'rb') as f:
     cipher = AESCipher(f.read())
@@ -87,13 +89,17 @@ with open("aes_key.txt", 'rb') as f:
 
 # Fernet Encrypt Function
 def encrypt(message: bytes) -> bytes:
-    f = open("key.txt", 'rb')
-    return Fernet(f.read()).encrypt(message)
+    with open("key.txt", 'rb') as f:
+        key = b64decode(f.read())
+        f.close()
+    return Fernet(key).encrypt(message)
 
 # Fernet Decrypt Function
 def decrypt(message: bytes) -> bytes:
-    f = open("key.txt", 'rb')
-    return Fernet(f.read()).decrypt(message)
+    with open("key.txt", 'rb') as f:
+        key = b64decode(f.read())
+        f.close()
+    return Fernet(key).decrypt(message)
 
 # File enccrypting function.
 def encodeFile(filename):
@@ -121,7 +127,7 @@ def decodeFile(filename,argv=""):
     except FileNotFoundError as e:
         print("File not found")
         raise FileNotFoundError(" ")
-    if not (argv == ""):
+    if (argv == ""):
         decodedOutput = cipher.decrypt(read)
         decodedOutput = urlsafe_b64decode(decodedOutput)
         decodedOutput = decrypt(decodedOutput)
@@ -129,8 +135,12 @@ def decodeFile(filename,argv=""):
         if (argv.standard_file_decryption):
             decodedOutput = decode(read)
         else:
+            print(repr(read))
             decodedOutput = cipher.decrypt(read)
+            print(repr(decodedOutput))
             decodedOutput = urlsafe_b64decode(decodedOutput)
+            print("HI")
+            print(repr(decodedOutput))
             decodedOutput = decrypt(decodedOutput)
 
     with open(filename, 'wb') as f:
@@ -184,7 +194,10 @@ def decode(msg):
     try:
         msg = msg.encode()
     except AttributeError as e:
+        print(f"AttributeError found? {e}")
         pass
+
+    print(msg)
     msg = decrypt(urlsafe_b64decode(cipher.decrypt(msg))).decode()
     msg = msg.lower()
     theDLetters = []
@@ -231,7 +244,7 @@ if (len(argv) == 1):
                     print("Name of file saved with fernet key: ")
                     an = input("> ")
                     print("Changing Fernet Key...")
-                    f2 = open(an)
+                    f2 = open(an, 'rb')
                     f.write(f2.read())
                     sleep(1.5)
                     print("Changed!")
@@ -241,7 +254,7 @@ if (len(argv) == 1):
                     print("Changing...")
                     f.write(an.encode())
                     del cipher
-                    cipher = AESCipher(an)
+                    cipher = AESCipher(an.encode())
                     sleep(1.5)
                     print("Changed!")
             if (a == "n") or (a == "N"):
@@ -274,7 +287,7 @@ if (len(argv) == 1):
                 else:
                     with open(key_name, "wb") as f2:
                         f2.write(f.read())
-                        print("Fernet Key is saved as saved_key.txt")
+                        print(f"Fernet Key is saved as {key_name}")
                     f.close()
             with open("aes_key.txt", "rb") as f:
                 if not (a == '.'):
@@ -285,7 +298,7 @@ if (len(argv) == 1):
                 else:
                     with open(aes_key_name, "wb") as f2:
                         f2.write(f.read())
-                        print("Fernet Key is saved as saved_aes_key.txt")
+                        print(f"Fernet Key is saved as {aes_key_name}")
                     f.close()
             if (a == "C") or (a == "c"):
                 print("Would you like to save to a file? Y / N")
@@ -334,6 +347,7 @@ if (len(argv) == 1):
             answer = input("> ")
             if (answer == "C") or (answer == "c"):
                 decodeTest = decode(input("Decode:"))
+                print(decodeTest)
             elif (answer == "F") or (answer == "f"):
                 print("What is the name of the file you'd like to open?")
                 name = input("> ")
@@ -341,22 +355,35 @@ if (len(argv) == 1):
                 print("Decoding...")
                 sleep(1.5)
                 print("Decoded!")
-            if (".txt" in name):
-                print(decodeTest.decode())
-            if (".txt" in name):
-                print("Would you like to save to a file? Y / N")
-                a = input("> ")
-                if (a == "y") or (a == "Y"):
-                    print("Name the file...")
-                    b = str(input("> "))
-                    with open(b, 'w') as f:
-                        print("Saving...")
-                        f.write(decodeTest)
-                        sleep(1.5)
-                        print("Saved!")
-                elif (a == "n") or (a == "N"):
-                    print("Okay then!")
-                system("pause")
+                if (".txt" in name):
+                    print(decodeTest.decode())
+                if (".txt" in name):
+                    print("Would you like to save to a file? Y / N")
+                    a = input("> ")
+                    if (a == "y") or (a == "Y"):
+                        print("Name the file...")
+                        b = str(input("> "))
+                        with open(b, 'w') as f:
+                            print("Saving...")
+                            f.write(decodeTest)
+                            sleep(1.5)
+                            print("Saved!")
+                    elif (a == "n") or (a == "N"):
+                        print("Okay then!")
+                    system("pause")
+            print("Would you like to save to a file? Y / N")
+            a = input("> ")
+            if (a == "y") or (a == "Y"):
+                print("Name the file...")
+                b = str(input("> "))
+                with open(b, 'w') as f:
+                    print("Saving...")
+                    f.write(decodeTest)
+                    sleep(1.5)
+                    print("Saved!")
+            elif (a == "n") or (a == "N"):
+                print("Okay then!")
+            system("pause")
         elif (answer == "*"):
             exit()
 
@@ -367,17 +394,19 @@ if (args.Method == "encrypt"):
         with open("key.txt", "wb") as f:
             f2 = open(args.change_key, 'rb')
             f.write(f2.read())
-            if (args.suppress_debug_messages):
-                f2.close()
-                f.close()
-            else:
-                print("Key changed")
-                f2.close()
-                f.close()
+        if (args.suppress_debug_messages):
+            f2.close()
+            f.close()
+        else:
+            print("Key changed")
+            f2.close()
+            f.close()
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key, 'rb')
             f.write(f2.read())
+            del cipher
+            cipher = AESCipher(f2.read())
             if (args.suppress_debug_messages):
                 f2.close()
                 f.close()
@@ -391,40 +420,42 @@ if (args.Method == "encrypt"):
             with open(args.save_file, mode="wb") as f:
                 f.write(output)
                 f.close()
-            with open("key.txt", "rb") as f:
-                if not (args.save_key == '.'):
-                    with open(join(args.save_key, args.save_key_name), 'wb') as f2:
-                        f2.write(f.read())
-                        if (args.suppress_debug_messages):
-                            pass
-                        else:
-                            print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
-                    f.close()
-                else:
-                    with open(args.save_key_name, "wb") as f2:
-                        f2.write(f.read())
-                        if (args.suppress_debug_messages):
-                            pass
-                        else:
-                            print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
-                    f.close()
-            with open("aes_key.txt", "rb") as f:
-                if not (args.save_key == '.'):
-                     with open(join(args.save_key, args.save_aes_key_name), 'wb') as f2:
-                         f2.write(f.read())
-                         if (args.suppress_debug_messages):
-                             pass
-                         else:
-                             print(f"AES Key is saved as {args.save_key}/{args.save_aes_key_name}")
-                     f.close()
-                else:
-                    with open(args.save_aes_key_name, "wb") as f2:
-                        f2.write(f.read())
-                        if (args.suppress_debug_messages):
-                            pass
-                        else:
-                            print(f"Fernet Key is saved as {args.save_key}/{args.save_aes_key_name}")
-                    f.close()
+        with open("key.txt", "rb") as f:
+            if not (args.save_key == '.'):
+                with open(join(args.save_key, args.save_key_name), 'wb') as f2:
+                    print(join(args.save_key, args.save_key_name))
+                    f2.write(f.read())
+                    if (args.suppress_debug_messages):
+                        pass
+                    else:
+                        print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
+                    f2.close()
+                f.close()
+            else:
+                with open(args.save_key_name, "wb") as f2:
+                    f2.write(f.read())
+                    if (args.suppress_debug_messages):
+                        pass
+                    else:
+                        print(f"Fernet Key is saved as {args.save_key}/{args.save_key_name}")
+                f.close()
+        with open("aes_key.txt", "rb") as f:
+            if not (args.save_key == '.'):
+                 with open(join(args.save_key, args.save_aes_key_name), 'wb') as f2:
+                     f2.write(f.read())
+                     if (args.suppress_debug_messages):
+                         pass
+                     else:
+                         print(f"AES Key is saved as {args.save_key}/{args.save_aes_key_name}")
+                 f.close()
+            else:
+                with open(args.save_aes_key_name, "wb") as f2:
+                    f2.write(f.read())
+                    if (args.suppress_debug_messages):
+                        pass
+                    else:
+                        print(f"Fernet Key is saved as {args.save_key}/{args.save_aes_key_name}")
+                f.close()
         print(output)
         if (args.suppress_debug_messages):
             exit()
@@ -489,11 +520,15 @@ if (args.Method == "decrypt"):
                 f2.close()
                 f.close()
             else:
-                print("Key changed")
+                print("Fernet key changed")
+                f2.close()
+                f.close()
     if (args.change_aes_key):
         with open("aes_key.txt", "wb") as f:
             f2 = open(args.change_aes_key, 'rb')
             f.write(f2.read())
+            del cipher
+            cipher = AESCipher(f2.read())
             if (args.suppress_debug_messages):
                 f2.close()
                 f.close()
