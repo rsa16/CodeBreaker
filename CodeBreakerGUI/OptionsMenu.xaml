@@ -1,0 +1,110 @@
+﻿<Window x:Class="CodeBreakerGUI.OptionsMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeBreakerGUI"
+        mc:Ignorable="d"
+        Title="OptionsMenuForEncryption" Height="406" Width="369.5">
+    <StackPanel HorizontalAlignment="Left" Height="420.312" Margin="-4,-0.333,-4.062,-3.979" VerticalAlignment="Top" Width="369.562">
+        <Grid Height="421.293">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Height="22.538" Margin="9,24.462,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="111.167" Grid.Row="2" FontWeight="Bold" FontSize="16" Grid.RowSpan="2"><Run Text="Keys"/><LineBreak/><Run/></TextBlock>
+            <Canvas x:Name="Files" Grid.ColumnSpan="3" Margin="8.666,0,15.687,17.941" Grid.RowSpan="3">
+                <TextBlock x:Name="FilePathText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="File Path:" Width="51.5" RenderTransformOrigin="0.53,1.439" Height="23.651" Canvas.Left="1.334" Canvas.Top="57.7"/>
+                <RichTextBox HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="344.834" Canvas.Left="0.375" Canvas.Top="75.957">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run x:Name="FilePath" Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <TextBlock x:Name="New_FileText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Save New File As Path:" Width="131.167" RenderTransformOrigin="0.53,1.439" Height="23.618" Canvas.Left="0.334" Canvas.Top="20.097"/>
+                <TextBlock x:Name="BoldText" HorizontalAlignment="Left" Height="22.538" TextWrapping="Wrap" VerticalAlignment="Top" Width="111.167" FontWeight="Bold" FontSize="16" Text="Files" Canvas.Left="1.334"/>
+                <RichTextBox HorizontalAlignment="Left" Height="20.104" VerticalAlignment="Top" Width="344.834" Canvas.Top="38.636">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run x:Name="New_File" Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Canvas>
+            <CheckBox x:Name="Change_Aes_Key" Content="Change AES Key?" HorizontalAlignment="Left" Height="14.667" Margin="10,23.526,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock x:Name="Aes_Key_Path_Text" HorizontalAlignment="Left" Height="17.743" Margin="10,3.257,0,0" Grid.Row="4" TextWrapping="Wrap" Text="AES Key Path:" VerticalAlignment="Top" Width="91.333"/>
+            <RichTextBox x:Name="Aes_Key_Path" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="19.333" Margin="10,21.258,0,0" Grid.Row="4" VerticalAlignment="Top" Width="141.333" Grid.RowSpan="2">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run x:Name="Aes_Key_Path_Text_Get" Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <CheckBox x:Name="Change_Fernet_Key" Content="Change Fernet Key?" HorizontalAlignment="Left" Height="14.667" Margin="65.166,23.526,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock x:Name="Fernet_Key_Path_Text" HorizontalAlignment="Left" Height="17.743" Margin="65.166,2.591,0,0" Grid.Row="4" TextWrapping="Wrap" Text="Fernet Key Path" VerticalAlignment="Top" Width="91.333" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <RichTextBox x:Name="Fernet_Key_Path" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="19.333" Margin="65.166,21.001,0,0" Grid.Row="4" VerticalAlignment="Top" Width="141.333" Grid.Column="1" Grid.RowSpan="2">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run x:Name="Fernet_Key_Path_Text_Get" Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <Button x:Name="Button" Grid.ColumnSpan="3" Content="" HorizontalAlignment="Center" Height="28" Grid.Row="8" VerticalAlignment="Center" Width="225" Click="Btn_Encrypt"/>
+            <TextBlock HorizontalAlignment="Left" Height="21.918" Margin="10,16.291,0,0" Grid.Row="5" TextWrapping="Wrap" Text="Save AES Key As:" VerticalAlignment="Top" Width="91.333"/>
+            <RichTextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="20" Margin="10,35.291,0,0" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Top" Width="141.333">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run x:Name="Save_AES_Key_As" Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <TextBlock HorizontalAlignment="Left" Height="21.918" Margin="65.166,16.291,0,0" Grid.Row="5" TextWrapping="Wrap" Text="Save Fernet Key As:" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Grid.Column="1"/>
+            <RichTextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="20" Margin="65.166,35.291,0,0" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Top" Width="141.333" Grid.Column="1">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run x:Name="Save_Fernet_Key_As" Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <Canvas x:Name="Text2" Grid.ColumnSpan="3" Margin="8.666,0,15.687,14.941" Grid.RowSpan="3" Visibility="Hidden">
+                <TextBlock x:Name="New_FileText1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Save File As (Optional):" Width="130.167" RenderTransformOrigin="0.53,1.439" Height="23.651" Canvas.Left="1.334" Canvas.Top="60.7"/>
+                <RichTextBox HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="344.834" Canvas.Left="0.375" Canvas.Top="78.957">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run x:Name="New_File1" Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <TextBlock x:Name="ConvertText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Convert from text:" Width="131.167" RenderTransformOrigin="0.53,1.439" Height="23.618" Canvas.Left="0.334" Canvas.Top="20.097"/>
+                <TextBlock x:Name="BoldText1" HorizontalAlignment="Left" Height="22.538" TextWrapping="Wrap" VerticalAlignment="Top" Width="111.167" FontWeight="Bold" FontSize="16" Text="Text" Canvas.Left="1.334"/>
+                <RichTextBox HorizontalAlignment="Left" Height="22.064" VerticalAlignment="Top" Width="344.834" Canvas.Top="38.636">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run x:Name="Convert" Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+
+            </Canvas>
+
+        </Grid>
+
+
+    </StackPanel>
+</Window>
+

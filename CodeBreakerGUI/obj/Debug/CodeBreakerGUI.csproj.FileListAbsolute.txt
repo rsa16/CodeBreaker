@@ -1,0 +1,17 @@
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Debug\CodeBreakerGUI.exe.config
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Debug\CodeBreakerGUI.exe
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Debug\CodeBreakerGUI.pdb
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.csprojAssemblyReference.cache
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\MainWindow.g.cs
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\App.g.cs
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI_MarkupCompile.cache
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI_MarkupCompile.lref
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\MainWindow.baml
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.g.resources
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.Properties.Resources.resources
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.csproj.GenerateResource.cache
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.csproj.CoreCompileInputs.cache
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.exe
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\CodeBreakerGUI.pdb
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\DialogueBoxEncryptOrDecrypt.g.cs
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Debug\DialogueBoxEncryptOrDecrypt.baml
