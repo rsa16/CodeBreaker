@@ -10,6 +10,8 @@ using UnityCoroutines;
 using Gat.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace CodeBreakerGUI
 {
@@ -23,6 +25,7 @@ namespace CodeBreakerGUI
         public bool textModifiedBySoftware = true;
         public static RoutedCommand NewWindow = new RoutedCommand();
         public static RoutedCommand New = new RoutedCommand();
+        public static RoutedCommand SearchWithBing = new RoutedCommand();
         public int times2 = 0;
         public int times = 0;
         public string FileName;
@@ -35,9 +38,8 @@ namespace CodeBreakerGUI
                 sw.Write(newWindows.Count);
                 sw.Close();
             }
-            ConsoleManager.Show();
+            //ConsoleManager.Show();
             ApplicationCommands.SaveAs.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift));
-
             this.Title = "Untitled - CodeBreaker";
             sfd.InitialDirectory = "C:\\";
             ofd.InitialDirectory = "C:\\";
@@ -47,6 +49,7 @@ namespace CodeBreakerGUI
             sfd.FilterIndex = 1;
             NewWindow.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control | ModifierKeys.Alt));
             New.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            SearchWithBing.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
             InitializeComponent();
             CommandBinding oBinding = new CommandBinding
             {
@@ -60,21 +63,146 @@ namespace CodeBreakerGUI
             {
                 Command = ApplicationCommands.Save
             };
+            CommandBinding undoBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Undo
+            };
+            CommandBinding cutBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Cut
+            };
+            CommandBinding copyBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Copy
+            };
+            CommandBinding pasteBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Paste
+            };
+            CommandBinding deleteBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Delete
+            };
+            CommandBinding searchWithBingBinding = new CommandBinding
+            {
+                Command = SearchWithBing
+            };
+            CommandBinding findBinding = new CommandBinding
+            {
+                Command = ApplicationCommands.Find
+            };
             oBinding.Executed += Event;
             oBinding.CanExecute += OpenCanExecute;
             sBinding.Executed += SaveAs;
             sBinding.CanExecute += SaveAsCanExecute;
             sbinding.Executed += Save;
             sbinding.CanExecute += SaveCanExecute;
+            undoBinding.CanExecute += undoCanExecute;
+            cutBinding.CanExecute += cutCanExecute;
+            copyBinding.CanExecute += copyCanExecute;
+            pasteBinding.CanExecute += pasteCanExecute;
+            deleteBinding.Executed += Delete;
+            deleteBinding.CanExecute += deleteCanExecute;
+            searchWithBingBinding.Executed += searchWithBing;
+            searchWithBingBinding.CanExecute += searchCanExecute;
+
+            findBinding.CanExecute += findCanExecute;
             CommandBindings.Add(oBinding);
             CommandBindings.Add(sBinding);
             CommandBindings.Add(sbinding);
-
+            CommandBindings.Add(undoBinding);
+            CommandBindings.Add(cutBinding);
+            CommandBindings.Add(copyBinding);
+            CommandBindings.Add(pasteBinding);
+            CommandBindings.Add(deleteBinding);
+            CommandBindings.Add(searchWithBingBinding);
+            CommandBindings.Add(findBinding);
+            textbox.Focus();
+            var timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(1)
+            };
+            timer.Tick += MainLoop;
+            timer.Start();
         }
 
-        private void SaveCanExecute(object sender,  CanExecuteRoutedEventArgs e) {
+
+        private void findCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
             e.CanExecute = true;
         }
+        private void searchWithBing(object sender, RoutedEventArgs e)
+        {
+            if (textbox.Selection.IsEmpty)
+            {
+                string url = "https://bing.com/search?q=" + Input_Text.Text.Replace(" ", "+");
+                var process = Process.Start(new ProcessStartInfo(url));
+            }
+            else
+            {
+                string url = "https://bing.com/search?q=" + textbox.Selection.Text.Replace(" ", "+");
+                var process = Process.Start(new ProcessStartInfo(url));
+            }
+            
+        }
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            Input_Text.Text = Input_Text.Text.Replace(textbox.Selection.Text, "");
+        } 
+        private void MainLoop(object sender, EventArgs e)
+        {
+            if (textbox.Selection.IsEmpty)
+            {
+                DeleteMenuItem.IsEnabled = false;
+            }
+            else
+            {
+                DeleteMenuItem.IsEnabled = true;
+            }
+            if (Input_Text.Text == "")
+            {
+                FindMenuItem.IsEnabled = false;
+            }
+            else
+            {
+                FindMenuItem.IsEnabled = true;
+            }
+            
+        }
+
+        private void deleteCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void searchCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void pasteCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void copyCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        
+        private void cutCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void undoCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void SaveCanExecute(object sender,  CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
+            
+        }
+
+         
 
         private void Save(object sender, RoutedEventArgs e)
         {
@@ -314,10 +442,12 @@ namespace CodeBreakerGUI
             if (FileName == null)
             {
                 Title = "*Untitled - CodeBreaker";
+                UndoMenuItem.IsEnabled = true;
                 return;
             }
             Title = string.Format("*{0} - CodeBreaker", FileName);
-            times2 = 1;
+            UndoMenuItem.IsEnabled = true;
+            
         }
 
         protected override void OnClosed(EventArgs e)
@@ -355,5 +485,14 @@ namespace CodeBreakerGUI
             ab.ApplicationLogo = applicationLogo;
             ab.Show();
         }
+
+        private void QuickConvert_Click(object sender, RoutedEventArgs e)
+        {
+            QuickConverter qc = new QuickConverter();
+            qc.Show();
+
+        }
+
+        
     }
 }

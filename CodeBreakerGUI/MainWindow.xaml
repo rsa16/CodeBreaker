@@ -115,51 +115,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <ControlTemplate x:Key="MenuItemControlTemplate3" TargetType="{x:Type MenuItem}">
-            <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                <Grid Margin="-1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width=""/>
-                        <ColumnDefinition Width="30"/>
-                        <ColumnDefinition SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
-                        <ColumnDefinition Width="20"/>
-                    </Grid.ColumnDefinitions>
-                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
-                    <Border x:Name="GlyphPanel" BorderBrush="#FF26A0DA" BorderThickness="1" Background="#3D26A0DA" ClipToBounds="False" HorizontalAlignment="Center" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
-                        <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Height="11" Width="10"/>
-                    </Border>
-                    <ContentPresenter x:Name="menuHeaderContainer" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="menuGestureText" Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
-                </Grid>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="Icon" Value="{x:Null}">
-                    <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
-                </Trigger>
-                <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
-                    <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
-                </Trigger>
-                <Trigger Property="IsHighlighted" Value="True">
-                    <Setter Property="Background" TargetName="templateRoot" Value="#3D26A0DA"/>
-                    <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF26A0DA"/>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="#FF707070"/>
-                    <Setter Property="Fill" TargetName="Glyph" Value="#FF707070"/>
-                </Trigger>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsHighlighted" Value="True"/>
-                        <Condition Property="IsEnabled" Value="False"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Background" TargetName="templateRoot" Value="#0A000000"/>
-                    <Setter Property="BorderBrush" TargetName="templateRoot" Value="#21000000"/>
-                </MultiTrigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.NewWindow}" Executed="New_Window" CanExecute="New_WindowCanExecute"/>
@@ -181,11 +136,24 @@
             </MenuItem>
             <MenuItem Header="_Edit" Height="23.5" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource MenuItemControlTemplate1}">
                 <!-- Add edit controls here-->
-                <MenuItem Header="_Sample Control" Template="{DynamicResource MenuItemControlTemplate2}"/>
+                <MenuItem x:Name="UndoMenuItem" Header="_Undo" Command="ApplicationCommands.Undo" Template="{DynamicResource MenuItemControlTemplate2}" IsEnabled="False" Margin="0,0,-1,0"/>
+                <MenuItem x:Name="RedoMenuItem" Header="_Redo" Command="ApplicationCommands.Redo" Template="{DynamicResource MenuItemControlTemplate2}" IsEnabled="False" Margin="0,0,-2,0"/>
+                <Separator Style="{DynamicResource SeparatorStyle1}"/>
+                <MenuItem x:Name="CutMenuItem" Header="_Cut" Command="ApplicationCommands.Cut" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-1.958,0" InputGestureText="Ctrl+X"/>
+                <MenuItem x:Name="CopyMenuItem" Header="_Copy" Command="ApplicationCommands.Copy" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-2.062,0"/>
+                <MenuItem x:Name="PasteMenuItem" Header="_Paste" Command="ApplicationCommands.Paste" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-2.062,0"/>
+                <MenuItem x:Name="DeleteMenuItem" Header="_Delete" Command="ApplicationCommands.Delete" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-2,0"/>
+                <Separator Style="{DynamicResource SeparatorStyle1}"/>
+                <MenuItem x:Name="SearchMenuItem" Header="_Search With Bing..." Command="{x:Static local:MainWindow.SearchWithBing}" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-2,0"/>
+                <MenuItem x:Name="FindMenuItem" IsEnabled="False" Header="_Find" Command="ApplicationCommands.Find" Template="{DynamicResource MenuItemControlTemplate2}" Margin="0,0,-1,0"/>
             </MenuItem>
             <MenuItem Header="_Format" Height="23.5" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource MenuItemControlTemplate1}">
                 <!-- Add Format controls here-->
                 <MenuItem Header="_Sample Control" Template="{DynamicResource MenuItemControlTemplate2}"/>
+            </MenuItem>
+            <MenuItem Header="_Tools" Height="23.5" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource MenuItemControlTemplate1}">
+                <!-- Add view items here -->
+                <MenuItem Header="_QuickConverter" Template="{DynamicResource MenuItemControlTemplate2}" Click="QuickConvert_Click"/>
             </MenuItem>
             <MenuItem Header="_View" Height="23.5" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource MenuItemControlTemplate1}">
                 <!-- Add view items here -->
@@ -206,5 +174,6 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <WebBrowser x:Name="myWebBrowser" />
     </DockPanel>
 </Window>

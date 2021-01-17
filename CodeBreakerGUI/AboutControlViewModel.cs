@@ -321,7 +321,15 @@ namespace Gat.Controls
 
 		void Window_Deactivated(object sender, System.EventArgs e)
 		{
-			Window.Close();
+			try
+            {
+				Window.Close();
+			}
+			catch
+            {
+				// do nothing
+            }
+			
 		}
 
 		/// <summary>

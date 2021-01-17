@@ -38,11 +38,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1; Check: not IsAdminInstallMode
 
 [Files]
-Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\CodeBreaker.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\CodeBreaker.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\app.publish\CodeBreaker.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\CodeBreaker\*"; DestDir: "{app}\CodeBreaker"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\codebreaker.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\devenv.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\app.publish\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\app.publish\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

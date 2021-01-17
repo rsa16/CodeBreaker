@@ -22,17 +22,5 @@ namespace CodeBreakerGUI.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("asdasd")]
-        public string AssemblyDescriptionAttribute {
-            get {
-                return ((string)(this["AssemblyDescriptionAttribute"]));
-            }
-            set {
-                this["AssemblyDescriptionAttribute"] = value;
-            }
-        }
     }
 }

@@ -25,3 +25,10 @@ D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\CodeBreaker.exe.manifest
 D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\CodeBreaker.application
 D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\CodeBreaker.exe
 D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\CodeBreaker.pdb
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\QuickConverter.g.cs
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\QuickConverter.baml
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\Microsoft.WindowsAPICodePack.dll
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\Microsoft.WindowsAPICodePack.xml
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\bin\Release\Microsoft.WindowsAPICodePack.Shell.xml
+D:\repos\CodeBreakerGUI\CodeBreakerGUI\obj\Release\CodeBreakerGUI.csproj.CopyComplete

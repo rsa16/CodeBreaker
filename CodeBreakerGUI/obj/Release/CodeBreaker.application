@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="CodeBreaker.exe.manifest" size="5140">
+    <dependentAssembly dependencyType="install" codebase="CodeBreaker.exe.manifest" size="6570">
       <assemblyIdentity name="CodeBreaker.exe" version="1.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gZqtqPScbtKXen45Is+urfgQq3Hz8QOUmttO2Am3y38=</dsig:DigestValue>
+        <dsig:DigestValue>tQnPBYh+Nicc2nU1hYUxXKRynDkBzxkunqJP+fEoutk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
+# Blend for Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBreakerGUI", "CodeBreakerGUI\CodeBreakerGUI.csproj", "{76EB6CA5-2D0E-449A-BB15-C64FA2F33E67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageTransition", "PageTransition\PageTransition.csproj", "{2E5782CA-813E-45DD-AFCA-7DEE426C22D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{76EB6CA5-2D0E-449A-BB15-C64FA2F33E67}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{76EB6CA5-2D0E-449A-BB15-C64FA2F33E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76EB6CA5-2D0E-449A-BB15-C64FA2F33E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5782CA-813E-45DD-AFCA-7DEE426C22D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5782CA-813E-45DD-AFCA-7DEE426C22D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5782CA-813E-45DD-AFCA-7DEE426C22D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5782CA-813E-45DD-AFCA-7DEE426C22D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
