@@ -36,14 +36,10 @@ According to article:
 > 3) Seperate in a group of 6-bit.
 > 011000 010110 001101 100101
 > 4) Calculate binary to decimal
-
-011000= 24, 010110= 22, 001101= 13, 100101= 37
-
-5) Covert decimal characters to base64 using base64 chart.
-
-24= Y, 22= W, 13= N, 37= l
-
-“ace” => “YWNl”
+> 011000= 24, 010110= 22, 001101= 13, 100101= 37
+> 5) Covert decimal characters to base64 using base64 chart.
+> 24= Y, 22= W, 13= N, 37= l
+> “ace” => “YWNl”
 
 
 
