@@ -7,10 +7,10 @@ CodeBreaker uses a Python CLI Script, also made by me and calls arguments from i
 
 ## Supported Encryption Algortithms
 As of now, it supports 6 encryption algorithms, listed below:
-- Fernet
-- AES
-- Base64
-- Sim
-- Pidge
-- SubCaes
+- Fernet Encryption
+- AES Encryption
+- Base64 Encoding
+- Sim Algorithm
+- Pidge Cipher
+- SubCaes Algorithm
  
