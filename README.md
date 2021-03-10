@@ -64,7 +64,16 @@ Then I look up i and e, and I get m.
 so hi turns into om.
 
 Now I do a caesar shift of 1, so om turns into pn.
+P is the 16th letter in the alphabet, and N is the 14th letter.
+So PN becomes 16, 14
+Then I run a series of calculations. For example, I can multiply each number by 2 and add 5.
+16 * 2 = 32 + 5 = 37
+14 * 2 = 28 + 5 = 33
+So 16, 14 turns into 37, 33
 
+Replacing the comma with a dot, I get 37.33
+
+From here I can base64 encode it, put it in morse code, or even save it to frequencies in a file. That's the Pidge Cipher.
 
 
 
