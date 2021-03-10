@@ -1,9 +1,10 @@
 # CodeBreaker
- An encryption tool that encrypts, text, files, and passwords.
+ An GUI encryption tool that encrypts, text, files, and passwords.
 ### What It Does
- It encrypts, with a custom subsitution cipher, a fernet encryption (saves key as by defualt saved_key.txt), a base64 encryption, and an AES encryption (saves aes_key by defualt as saved_aes_key.txt)
- It also supports argument handling, so the tool may be used in other programs.
+ CodeBreaker is an encryption and decryption tool, specifically targeted to encrypt and send secret messages. It allows different encryption algorithms, many of which I've invented myself. It can also serve as a text editor, but not with many features. Encrypting is as simple as a few clicks, as such is decrypting. For more advanced users you can do the Manual Encryption. 
 ### How it works
-In the encode function, it goes through each letter in a string. Then it subsitutes that letter, with another letter specified in a list. Then it does further encryption. First it encrypts it with the fernet symmetrical algorithm. Then it base64encodes. After that it AES encrypts it. And lastly it returns the result. Then it output's the result, and you have an option of saving the result to a file. The same thing happens in encodefile, except it only uses subsitution cipher when encrypting txt files (assuming it has no words that cannot be typed by a keyboard). It also rewrites the file with the new encrypted data.
-The decode function is the same thing, but reversed. The decodefile is reverse as well.
+CodeBreaker uses a Python CLI Script, also made by me and calls arguments from it. I wanted to divide the cryptography side to Python and the GUI side to C sharp, which is why CodeBreaker is written using both languages. Python is essentially my backend, where C Sharp is the front end in the program. In the CodeBreakerScript repository I explain more into how the script itself works.
+
+### Supported Encryption Algortithms
+As of now, it supports fernet, base64, and aes. It also supports three encryption algorithms invented by yours truly. The first algorithm: The Sim Algorithm, Second: The SubCaes Algorithm, Third: The Pidge Algorithm.
  
