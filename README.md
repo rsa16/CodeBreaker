@@ -13,6 +13,7 @@ As of now, it supports 6 encryption algorithms, listed below:
 - Sim Algorithm
 - Pidge Cipher
 - SubCaes Algorithm
+
 More into detail on them below.
 ### Fernet Encryption
 A symmetrical encryption, built on top of some other primitive encryptions.
