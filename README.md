@@ -26,7 +26,7 @@ According to article: https://www.atpinc.com/blog/what-is-aes-256-encryption
 > Inversely, if the host wants to retrieve data from the storage device, the AES engine decrypts the cipher text in the NAND flash, and then transmits data to the host as plain text. The encryption/decryption process is done at the flash level and does not require host intervention, so there is no performance degradation and data transfer does not slow down.
 > 
 ### Base64 Encoding
-According to article:
+According to quora page: https://www.quora.com/What-is-base64-encoding
 > String to be encoded : “ace”, Length=3
 > 1) Convert each character to decimal.
 > a= 97, c= 99, e= 101
@@ -40,6 +40,31 @@ According to article:
 > 5) Covert decimal characters to base64 using base64 chart.
 > 24= Y, 22= W, 13= N, 37= l
 > “ace” => “YWNl”
+
+### Sim Algorithm
+I invented this one myself. To be perfectly honest this is actually quite simple. I combine multiple algorithms into one. First I run a SubCaes algorithm, then a fernet encryption, then an aes encryption, and then a base64 encryption. Quite crude, but still an algorithm.
+
+### SubCaes Algorithm
+Now this one is built on top of a Caesar Shift. Particularly this encryption isn't very safe, as it a subsitution cipher with no real key. All vowels are replaced with numbers, and all other letters are shifted 1. Perhaps you can change how much they are shifted, and it can be a better algorithm?
+
+### Pidge Cipher
+Particularly named the Pidge Cipher because I was inspired by a man in a show named Voltron to invent this encryption.
+This ones quite complicated, so I put this into the script. First lets say we want to encrypt hi.
+First I need to define a keyword. For this, lets make it hey.
+
+hey is longer then hi, so i need to take the remove the last letter
+
+This now becomes he.
+hi
+he
+
+The vigenere table is basically a multiplication table.
+On it I look up h and h, and i get o.
+Then I look up i and e, and I get m.
+so hi turns into om.
+
+Now I do a caesar shift of 1, so om turns into pn.
+
 
 
 
