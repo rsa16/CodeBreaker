@@ -6,5 +6,11 @@
 CodeBreaker uses a Python CLI Script, also made by me and calls arguments from it. I wanted to divide the cryptography side to Python and the GUI side to C sharp, which is why CodeBreaker is written using both languages. Python is essentially my backend, where C Sharp is the front end in the program. In the CodeBreakerScript repository I explain more into how the script itself works.
 
 ## Supported Encryption Algortithms
-As of now, it supports fernet, base64, and aes. It also supports three encryption algorithms invented by yours truly. The first algorithm: The Sim Algorithm, Second: The SubCaes Algorithm, Third: The Pidge Algorithm.
+As of now, it supports 6 encryption algorithms, listed below:
+- Fernet
+- AES
+- Base64
+- Sim
+- Pidge
+- SubCaes
  
